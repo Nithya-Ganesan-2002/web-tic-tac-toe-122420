@@ -1,0 +1,200 @@
+/* Minimal, Modern, Responsive Tic Tac Toe CSS, color-driven by theme spec */
+
+:root {
+  --primary: #1e88e5;
+  --accent: #43a047;
+  --secondary: #ffffff;
+  --ttt-bg: var(--secondary);
+  --ttt-board-border: #cfd8dc;
+  --ttt-shadow: rgba(90,120,140,0.07);
+  --ttt-square-bg: #f5f6fa;
+  --ttt-square-hover: #e3f2fd;
+  --ttt-square-active: #bbdefb;
+  --ttt-x: var(--primary);
+  --ttt-o: var(--accent);
+  --ttt-win-bg: #e8f5e9;
+  --ttt-footer: #eceff1;
+}
+
+.ttt-app-bg {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--ttt-bg);
+  font-family: 'Inter', ui-sans-serif, system-ui, Arial, sans-serif;
+}
+
+.ttt-centered {
+  margin: auto;
+  margin-top: 6vh;
+  padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+  background: var(--ttt-bg);
+  border-radius: 20px;
+  box-shadow: 0 4px 30px var(--ttt-shadow);
+  max-width: 340px;
+  min-width: 270px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ttt-title {
+  font-size: 2.1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px 0;
+}
+
+.ttt-status {
+  font-size: 1.12rem;
+  letter-spacing: 0.02em;
+  margin-bottom: 14px;
+  color: #30404d;
+  min-height: 24px;
+}
+
+.ttt-grid {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  gap: 0;
+  background: var(--ttt-board-border);
+  border-radius: 11px;
+  box-shadow: 0 1.5px 7px var(--ttt-shadow);
+  overflow: hidden;
+  width: 270px;
+  aspect-ratio: 1 / 1;
+  max-width: 75vw;
+}
+
+.ttt-row {
+  display: flex;
+  width: 100%;
+  flex: 1;
+}
+
+.ttt-square {
+  flex: 1;
+  aspect-ratio: 1;
+  text-align: center;
+  cursor: pointer;
+  font-size: 2.8rem;
+  border: none;
+  border-right: 1.5px solid var(--ttt-board-border);
+  border-bottom: 1.5px solid var(--ttt-board-border);
+  background: var(--ttt-square-bg);
+  transition: background 0.13s;
+  color: #32414b;
+  font-weight: 700;
+  outline: none;
+  padding: 0;
+  will-change: background, color;
+  user-select: none;
+}
+
+.ttt-row .ttt-square:last-child {
+  border-right: none;
+}
+
+.ttt-grid .ttt-row:last-child .ttt-square {
+  border-bottom: none;
+}
+
+.ttt-square.ttt-highlight {
+  background: var(--ttt-win-bg);
+}
+
+.ttt-square:hover:enabled,
+.ttt-square:focus:enabled {
+  background: var(--ttt-square-hover);
+}
+
+.ttt-square:active:enabled {
+  background: var(--ttt-square-active);
+}
+
+.ttt-square:disabled {
+  color: #aaa;
+  background: var(--ttt-square-bg);
+  cursor: not-allowed;
+}
+
+.ttt-square:empty::after {
+  content: '';
+}
+
+.ttt-square {
+  /* Ensure X and O get color */
+}
+
+.ttt-square:contains('X'), .ttt-square[data-value="X"] {
+  color: var(--ttt-x);
+}
+
+.ttt-square:contains('O'), .ttt-square[data-value="O"] {
+  color: var(--ttt-o);
+}
+
+/* But for React, color in render for X/O */
+
+.ttt-reset-btn {
+  background: var(--primary);
+  color: var(--secondary);
+  padding: 0.7rem 1.6rem;
+  border: none;
+  border-radius: 15px;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.025em;
+  margin-top: 0.2rem;
+  margin-bottom: 0.1rem;
+  box-shadow: 0 2px 8px var(--ttt-shadow);
+  transition: transform 0.07s, box-shadow 0.18s, opacity 0.18s;
+  cursor: pointer;
+}
+
+.ttt-reset-btn:hover,
+.ttt-reset-btn:focus {
+  opacity: 0.94;
+  transform: scale(1.036);
+  box-shadow: 0 5px 16px var(--ttt-shadow);
+}
+
+.ttt-reset-btn:active {
+  opacity: 0.86;
+  transform: scale(0.989);
+}
+
+.ttt-footer {
+  text-align: center;
+  margin-top: auto;
+  padding: 0.8rem 0 0.4rem 0;
+  background: var(--ttt-footer);
+  color: #6a7a89;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border-top: 1.5px solid #e0e0e0;
+}
+
+@media (max-width: 600px) {
+  .ttt-centered {
+    max-width: 98vw;
+    min-width: unset;
+    padding: 1rem 0.25rem 0.7rem 0.25rem;
+  }
+  .ttt-title {
+    font-size: 1.25rem;
+  }
+  .ttt-grid {
+    width: 98vw;
+    min-width: 200px;
+    max-width: 99vw;
+  }
+}
+
+@media (max-width: 400px) {
+  .ttt-grid {
+    min-width: 133px;
+  }
+}
